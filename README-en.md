@@ -86,20 +86,6 @@ Packaging, audio file conversion, midi and other general audio tools
   
 SDK function
 -------------
-* Supports decoding and playback of built-in FLASH
-* Support the decoding and playback of external FLASH
-* Support decoding MIO function
-* Support the decoding and playback of the two formats of .a/.b/.e, .f1a/.f1b/.f1c
-* Support MIDI playback
-* Support variable speed modulation (but need to adjust the system clock above 100Mhz)
-* Supports up to .a/.b/.e + .f1a/.f1b/.f1c two channels of audio decoding and playback at the same time
-* DAC supports PWM differential output and external single-ended power amplifier
-* DAC supports 8K, 12k, 16K, 24K, 32K sampling rates
-* Support hardware resampling
-* Shutdown power consumption 1.7uA+
-  
-MCU information
--------------
 * Support decoding and playback of built-in FLASH
 * Support decoding and playback of external FLASH
 * Support decoding MIO function
@@ -121,6 +107,24 @@ MCU information
 * Support dual backup upgrade;
 * Support soft shutdown Softoff, power consumption 2uA+;
 * Supports wake-up in place and low power consumption Powerdown, power consumption 19uA+;
+  
+MCU information
+-------------
+* 32bit RISC / 240MHz /32K+4k+16K
+* flash 
+* 16bit audio adc
+* 16bit audio dac
+* 16bit Class-D Speaker Driver
+* 1 x Full speed USB
+* 1 x SD host controller
+* 3 x Multi-function 16bit timer
+* 2 x UART interface
+* 1 x I2C Master/Slave interface
+* 2 x SPI Master/Slave interface
+* 4 x MCPWM
+* 1 x GPCRC
+* 1 x 10bit GPADC(10 Channels)
+* 8 x GPIO Support function remapping
 
 Community
 --------------

@@ -99,7 +99,7 @@ SDK主要功能
 
 MCU信息
 -------------
-* 32bit RISC / 240MHz /20K+16K
+* 32bit RISC / 240MHz /32K+4k+16K
 * flash 
 * 16bit audio adc
 * 16bit audio dac

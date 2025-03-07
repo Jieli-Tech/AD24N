@@ -39,7 +39,7 @@ Documentation
 
 * Chipset brief : [SoC datasheet](./doc)
 
-* Product Select Guide : [SoC Select Guide.pdf](./杰理科技32位AD系列语音MCU选型表.pdf)
+* Product Select Guide : [SoC Select Guide.pdf](./doc杰理科技32位AD系列语音MCU选型表.pdf)
 
 * SDK Version: [SDK History](./doc/AD24N_SDK_发布版本信息.pdf)
 

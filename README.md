@@ -37,9 +37,9 @@ AD24N 系列通用MCU SDK 固件程序
 
 * 芯片简介 : [SoC 数据手册扼要](./doc)
 
-* 芯片选型号手册 : [SoC 选型手册.pdf](./杰理科技32位AD系列语音MCU选型表.pdf)
+* 芯片选型号手册 : [SoC 选型手册.pdf](./doc/杰理科技32位AD系列语音MCU选型表.pdf)
 
-* SDK 版本信息 : [SDK 历史版本](doc/AD24N_SDK_发布版本信息.pdf)
+* SDK 版本信息 : [SDK 历史版本](./doc/AD24N_SDK_发布版本信息.pdf)
 
 * SDK 介绍文档 : [SDK 快速开始简介](./doc/AD24N_SDK手册_v1.0.pdf)
 

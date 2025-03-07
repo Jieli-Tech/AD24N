@@ -1,7 +1,7 @@
 # fw-AD24N
 About Firmware for Generic MCU SDK（AD24N series）, Support AD24N
 
-[tag download]:https://gitee.com/Jieli-Tech/fw-AD24N/tags
+[tag download]:https://gitee.com/Jieli-Tech/AD24N/tags
 [tag_badgen]:https://img.shields.io/github/v/tag/Jieli-Tech/fw-AD24N?style=plastic&labelColor=ffffff&color=informational&label=Tag&
 
 # fw-AD24N_SDK   [![tag][tag_badgen]][tag download]

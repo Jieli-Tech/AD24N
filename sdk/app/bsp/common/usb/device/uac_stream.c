@@ -5,6 +5,7 @@
 #include "usb/device/usb_stack.h"
 #include "usb/device/uac_audio.h"
 #include "usb/usr/usb_audio_interface.h"
+#include "usb/usr/usb_mic_interface.h"
 #include "uac_stream.h"
 #include "usb_config.h"
 #include "circular_buf.h"
@@ -293,16 +294,12 @@ static const s16 sin_48k[] = {
 static int (*mic_tx_handler)(int, void *, int) SEC(.uac_rx);
 int uac_mic_stream_read(u8 *buf, u32 len)
 {
-    if (mic_stream_is_open == 0) {
-        return 0;
-    }
-
 #if USB_DEVICE_CLASS_CONFIG & MIC_CLASS
-    int rlen = cbuf_read(&cbuf_usb_mic_o, buf, len);
-    if (rlen != len) {
-        log_info("buf null\n");
+    if (mic_stream_is_open == 0) {
+        memset(buf, 0, len);
+        return len;
     }
-    return rlen;
+    return usb_slave_mic_read(buf, len);
 #endif
 
 #if 0//48K 1ksin
@@ -372,7 +369,7 @@ u32 uac_mic_stream_open(u32 samplerate, u32 frame_len, u32 ch)
     /* event.u.dev.value = (int)((ch << 24) | samplerate); */
     /* sys_event_notify(&event);                           */
 #if USB_DEVICE_CLASS_CONFIG & MIC_CLASS
-    usb_mic_init();
+    usb_slave_mic_open(samplerate, frame_len, ch);
 #endif
     mic_stream_is_open = 1;
     return 0;
@@ -391,7 +388,7 @@ void uac_mic_stream_close()
     /* sys_event_notify(&event); */
     mic_stream_is_open = 0;
 #if USB_DEVICE_CLASS_CONFIG & MIC_CLASS
-    usb_mic_uninit();
+    usb_slave_mic_close();
 #endif
 }
 #endif

@@ -43,7 +43,7 @@ Documentation
 
 * SDK Version: [SDK History](./doc/AD24N_SDK_发布版本信息.pdf)
 
-* SDK introduction : [SDK quick start guide](./doc/AD24N_SDK手册_v1.0.pdf)
+* SDK introduction : [SDK quick start guide](./doc/AD24N_SDK手册_v1.1.pdf)
 
 * SDK Online documentation : [SDK Online documentation](https://doc.zh-jieli.com/AD24/zh-cn/master/index.html)
 

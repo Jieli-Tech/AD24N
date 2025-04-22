@@ -389,3 +389,110 @@ int vfs_set_vol(void *pvfs, u8 *name)
 }
 #endif
 
+
+/* --------------------------------------------------------------------------*/
+/**
+ * @brief    文件删除统一处理
+ *
+ * @param pvfs 文件系统挂载后的句柄
+ * @param path 扫描路径名
+ * @param param 配置参数
+ * @param dir_flag 是否删除文件夹标志
+ * @note 加速处理:(删除文件的时候使用)从前往后依次删除. 文件夹必须从后往前删。
+ *
+ * @return  0成功， 其他失败
+ */
+/* ----------------------------------------------------------------------------*/
+static int vfs_delete_deal(void *pvfs, char *path, char *param, u8 dir_flag)
+{
+    u16 folder_total_file = 0;
+    int d_err = 0;
+    struct vfscan *fsn = NULL;
+    void *pvfile = NULL;
+
+    fsn = vfs_fscan(pvfs, path, param, 9, NULL);
+    if (fsn == NULL) {
+        r_printf(">>>[test]:err!!!!!! fsacn fsn fail\n");
+        return 1;
+    }
+    folder_total_file = fsn->file_number;
+    y_printf(">>>[test]:total = %d\n", folder_total_file);
+    for (int i = folder_total_file; i >= 1; i--) {
+        if (!dir_flag) {
+            d_err = vfs_select(pvfs, &pvfile, fsn, FSEL_BY_NUMBER, folder_total_file - i + 1); //加速处理，不用找到最后一个文件。
+        } else {
+            d_err = vfs_select(pvfs, &pvfile, fsn, FSEL_BY_NUMBER, i);
+        }
+        if (pvfile == NULL) {
+            r_printf(">>>[test]:err!! select file err\n");
+            return 1;
+        }
+        putchar('D');
+        d_err = vfs_file_delete(pvfile);
+        if (d_err || pvfile == NULL) {
+            r_printf(">>>[test]:err!! delete file err\n");
+            return 1;
+        }
+        vfs_file_close(&pvfile);
+        pvfile = NULL;
+    }
+    return 0;
+}
+
+
+/* --------------------------------------------------------------------------*/
+/** @brief:文件夹删除处理
+ *
+ * @param pvfs 文件系统挂载后的句柄
+ * @param path 需要删除的文件夹的路径
+ * @author:phewlee
+ * @note:
+ * @date: 2024-09-05,10:16
+ * @return
+ */
+/* ----------------------------------------------------------------------------*/
+int vfs_delete_dir(void *pvfs, char *path)
+{
+    int err = 0;
+    struct __dev *dev;
+    void *pvfile = NULL;
+    /* char path[128] = {0}; */
+
+    static const u8 delete_file_param[] = "-t"
+                                          "ALL"
+                                          " -sn -r";
+
+    static const u8 delete_folder_param[] = "-t"
+                                            "ALL"
+                                            " -sn -d -r";
+
+#if 0
+    dev = dev_manager_find_spec(dev_logo, 0);
+    if (dev == NULL) {
+        r_printf(">>>[test]:errr!!!!!!!!! not find dev\n");
+        return 1;
+    }
+    char *root_path = dev_manager_get_root_path(dev);
+    memcpy(path, root_path, strlen(root_path));
+    memcpy(path + strlen(root_path), folder, folder_len);
+#endif
+    r_printf(">>>[test]:path = %s\n", path);
+    err = vfs_delete_deal(pvfs, path, (char *)delete_file_param, 0);
+    if (err) {
+        r_printf(">>>[test]:errr!!!!!!!!! delete file deal fail\n");
+        return 1;
+    }
+    err = vfs_delete_deal(pvfs, path, (char *)delete_folder_param, 1);
+    if (err) {
+        r_printf(">>>[test]:errr!!!!!!!!! delete folder  deal fail\n");
+        return 1;
+    }
+    err = vfs_openbypath(pvfs, &pvfile, path);
+    if (pvfile == NULL) {
+        r_printf(">>>[test]:err open folder\n");
+        return 1;
+    }
+    err = vfs_file_delete(pvfile);
+    vfs_file_close(&pvfile);
+    return err;
+}

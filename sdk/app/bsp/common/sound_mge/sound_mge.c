@@ -98,6 +98,7 @@ void speaker_soft3_isr()
 {
     bit_clr_swi(3);
     sound_out_obj *sound = stream_sound;
+
     if (NULL == sound) {
         log_error("soft3 sound null\n");
         return;
@@ -123,7 +124,6 @@ void speaker_soft3_isr()
     }
 
 }
-
 /*----------------------------------------------------------------------------*/
 /**@brief   数据流stream_sound注册函数
    @param   psound:注册进来的sound
@@ -185,3 +185,20 @@ void stream_sound_uninit(void)
     HWI_Uninstall(IRQ_SOFT3_IDX);
     unregist_stream_sound();
 }
+
+bool sound_out_init(sound_out_obj *psound, void *cbuf, u8 info)
+{
+    if (NULL != psound) {
+        memset(psound, 0, sizeof(sound_out_obj));
+        psound->p_obuf = cbuf;
+        /*psound->info = info;//单声道*/
+        return 1;
+    }
+    return 0;
+}
+
+
+
+
+
+

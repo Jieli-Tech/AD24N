@@ -5,10 +5,10 @@
 
 #define UART_LOG    1
 
-#if UART_LOG
 #define     DEBUG_UART_NUM      0           //需与DEBUG_UART对齐
 #define     DEBUG_UART          JL_UART0    //需与DEBUG_UART_NUM对齐
 
+#if UART_LOG
 void log_uart_init(u32 fre);
 void uart_uninit(void);
 int putchar_in_ram(char a);

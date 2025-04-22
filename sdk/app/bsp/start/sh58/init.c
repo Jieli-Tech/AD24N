@@ -28,6 +28,7 @@
 /* #include "vm_sfc.h" */
 #include "tzflash.h"
 #include "tzflash_api.h"
+#include "code_v2/update.h"
 
 #define LOG_TAG_CONST       NORM
 #define LOG_TAG             "[normal]"
@@ -98,12 +99,14 @@ int flash_info_init(void)
     boot_info.flash_size = capacity;
     log_info("boot info 0x%x\n", boot_info.flash_size);
 
+    u8 uuid_buf[16];
     struct tzflash_ndec_cfg_data ndec_cfg;
     ndec_cfg.saddr = boot_info.vm.vm_saddr;
     ndec_cfg.eaddr = tzflash_cpu2flash_addr((void *)(0xfffffffUL));
     memcpy(&ndec_cfg.sfc, &boot_info.sfc, sizeof(struct sfc_info));
     dev_ioctl(device, IOCTL_SET_VM_INFO, (u32)&ndec_cfg);
     dev_ioctl(device, IOCTL_SET_PROTECT_INFO, (u32)flash_code_protect_callback);
+    dev_ioctl(device, IOCTL_READ_FLASH_UUID, (u32)uuid_buf);
     dev_close(device);
 
     u32 sydf_get_top_area_info(const char *path, u32 * p_addr, u32 * p_len, u32 times);
@@ -238,6 +241,12 @@ void system_init(void)
     dac_init_api(SR_DEFAULT, 0);
     /* test_fs(); */
     d_mio_module_init();
+
+    /* #if defined(UPDATE_V2_EN) && (1 == UPDATE_V2_EN) */
+    //升级初始化
+    int app_update_init(void);
+    app_update_init();
+    /* #endif */
 
 }
 #if 0

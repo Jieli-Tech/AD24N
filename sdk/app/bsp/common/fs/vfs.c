@@ -62,6 +62,9 @@ u32 vfs_mount(void **ppvfs, void *device, void *type)
                     continue;
                 }
 
+                if (0 == strcmp(ops->fs_type, "freefs")) {
+                    continue;
+                }
             }
             if (0 == ops->mount(&(pvfs->pfs), device)) {
                 pvfs->ops = ops;

@@ -87,3 +87,5 @@ const bool control_poff = 1;
 const bool control_poff = 0;
 #endif
 
+//使能rtc模块
+const bool config_rtc_enable = 0;

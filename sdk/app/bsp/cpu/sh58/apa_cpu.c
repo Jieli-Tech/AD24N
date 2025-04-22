@@ -28,8 +28,6 @@ void apa_init(u32 sr, bool delay_flag)
     HWI_Install(IRQ_APA_SOFT, (u32)apa_isr, IRQ_AUAPA_IP);
     apa_clk_open();
 
-    audio_apa_analog_init();
-
     memset((void *)&g_apa_para, 0, sizeof(g_apa_para));
     if (APA_PWM_192M_EN) {
         bool res = get_apa_para_0(&g_apa_para, sr, APA_DSM_CLK_MODE);
@@ -40,10 +38,14 @@ void apa_init(u32 sr, bool delay_flag)
 
     }
     apa_phy_init(&g_apa_para, APA_CON0_DEFAULT, APA_PWM_MODE);
+    audio_apa_analog_init();
+
 
     SFR(JL_APA->APA_CON0,  0,  2,  0b11);     // pwm_en dsm_en
     delay(100);
     SFR(JL_APA->APA_CON0, 20,  1,  1);        // apa async_fifo
+    delay(100);
+    SFR(JL_APA->APA_CON0, 2, 1, 0);  // 解APA数字部分mute
 }
 
 /*----------------------------------------------------------------------------*/

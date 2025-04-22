@@ -33,6 +33,7 @@ typedef struct _MIDI_CTRL_CONTEXT_ {
     u32(*ctl_confing)(void *work_buf, u32 cmd, void *parm);
     u32(*vel_vibrate)(void *work_buf, u8 nkey, u8 vel_step, u8 vel_rate, u8 chn);  //vel_step:支持0到7：抖动步长,  vel_rate支持0到15：抖动幅度
     u8 *(*query_play_key)(void *work_buf, u8 chn); //查询指定通道的key播放，有MAX_CTR_PLAYER_CNT个值，若为255则为无效值
+    u32(*glissando)(void *work_buf, u16 pitch_val, u8 key, u8 chn);
 } MIDI_CTRL_CONTEXT;
 
 

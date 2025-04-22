@@ -34,6 +34,7 @@ enum {
     // MSG_POWER_OFF,
     MSG_PLAY_FILE1,
     MSG_PLAY_FILE2,
+    MSG_PLAY_F1X_DEMO,
 
     ///音乐操作相关消息
     MSG_PP,

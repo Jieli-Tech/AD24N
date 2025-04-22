@@ -129,6 +129,7 @@ void mdelay(u32 ms);
 void rc_udelay(u32 us);
 u32 get_sys_us_cnt(void);
 void sys_pll_ldo_trim_check();
+void uart_clk_src_std48m();
 
 #define PLL_192M_LIMIT 192000000
 #define PLL_240M_LIMIT 240000000

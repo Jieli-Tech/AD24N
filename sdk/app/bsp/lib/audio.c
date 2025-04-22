@@ -74,6 +74,7 @@ void dac_power_off()
 void dac_power_on(u32 sr, bool delay_flag)
 {
     audio_init();
+    rdac_phy_vol(16384);
     dac_init_api(sr, delay_flag);
 }
 

@@ -10,8 +10,12 @@
 #include "iir.h"
 
 #define TCFG_SPK_SRC_ENABLE                 1
-#define TCFG_MIC_SRC_ENABLE                 1
 
+#ifdef SYNC_VOICE_LIGHT//语音灯--voice_light
+#define TCFG_MIC_SRC_ENABLE                 1
+#else//玩具--voice_toy
+#define TCFG_MIC_SRC_ENABLE                 0
+#endif
 typedef struct _uac_sync {
     LowPassFilter f_percent;
     // u32 sync_cnt;

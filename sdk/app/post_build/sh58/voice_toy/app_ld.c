@@ -2,12 +2,16 @@
 #include  "maskrom_stubs.ld"
 //config
 
-_BOOT_RAM_BEGIN = _MASK_EXPORT_MEM_BEGIN - 0x24;
+UPDATA_SIZE     = 0x200;
+UPDATA_BEG      = _MASK_EXPORT_MEM_BEGIN - UPDATA_SIZE;
+
+_BOOT_RAM_SIZE  = 0x2C;
+_BOOT_RAM_BEGIN = _MASK_EXPORT_MEM_BEGIN - _BOOT_RAM_SIZE;
 MEMORY
 {
     app_code(rx)        : ORIGIN = 0xC000100,            LENGTH = 64M-0x100
     ram0(rw)            : ORIGIN = _RAM_LIMIT_L,         LENGTH = _BOOT_RAM_BEGIN - _RAM_LIMIT_L
-    boot_ram(rw)        : ORIGIN = _BOOT_RAM_BEGIN,     LENGTH = 0x24
+    boot_ram(rw)        : ORIGIN = _BOOT_RAM_BEGIN,     LENGTH = _BOOT_RAM_SIZE
 }
 
 ENTRY(_start)
@@ -270,6 +274,17 @@ SECTIONS
             . = pc_data_end;
             *(.norflash_cache_buf)
         }
+
+        .d_update_and_new_stack
+        {
+            PROVIDE(update_overlay_start = .);
+            *(.update_buf0)
+            PROVIDE(update_overlay_end = .);
+            PROVIDE(new_stack_buf_start = .);
+            . += 0xc00;
+            *(.new_stack_data)
+            PROVIDE(new_stack_buf_end = .);
+        }
         /* .d_ima {  *(.a_data) } */
     } > ram0
 
@@ -277,6 +292,8 @@ SECTIONS
     d_dec_1 = MAX(d_dec_0 ,mp3_st_buf_end);
     d_dec_2 = MAX(d_dec_1 ,wav_buf_end);
     d_dec_max = MAX(d_dec_2 ,f1a_2_buf_end);
+    d_new_stack_end = MAX(d_dec_max ,new_stack_buf_end);
+    d_new_stack_start = d_new_stack_end - 0xc00;
 
 
     .heap_buf ALIGN(4) : SUBALIGN(4)
@@ -427,6 +444,8 @@ SECTIONS
     ASSERT((data_begin % 4) == 0, "data_begin size not 4")
 
 }
+
+/* #include "update/code_v2/update.ld" */
 
 lowpower_overlay_addr       = lowpower_buf_start;
 lowpower_overlay_begin      = data_begin + data_size;

@@ -2,7 +2,7 @@
 #include "vfs.h"
 #include "my_malloc.h"
 #include "device.h"
-#include "update.h"
+/* #include "update.h" */
 #define LOG_TAG_CONST       NORM
 #define LOG_TAG             "[normal]"
 #include "log.h"
@@ -27,14 +27,14 @@ void dual_bank_test()
     struct device *device = dev_open((char *)dev_name, NULL);
     if (device == NULL) {
         log_error("device null !!!! \n");
-        res = DEVIVE_OPEN_ERROR;
+        res = E_DEV_NULL;
         goto __close_dev;
     }
     void *pfs = NULL, *pfile = NULL;
     res = vfs_mount(&pfs, (void *)device, "simple_fat");
     if (res) {
         log_error("fat mount error !!! \n");
-        res = FAT_MOUNT_ERROR;
+        res = E_MOUNT;
         goto __close_fs;
     }
 
@@ -44,7 +44,7 @@ void dual_bank_test()
     res = vfs_openbypath(pfs, &pfile, file_path);
     if (res) {
         log_error("opend file error !!! 0x%x\n", res);
-        res = FILE_OPEN_ERROR;
+        res = E_OPENBYPATH;
         goto __close_fs;
     }
 
@@ -84,13 +84,13 @@ void dual_bank_test()
     log_info("addr %x,size %x\n", upgrade_start_addr, bank_size);
     if (res) {
         log_error("opend bank file error !!! 0x%x\n", res);
-        res = FILE_OPEN_ERROR;
+        res = EINVAL;
         goto __write_end;
     }
 
     if (bank_size < file_size) {
         log_error("bank size too samll !!! 0x%x < \n", bank_size, file_size);
-        res = FILE_OPEN_ERROR;
+        res = EINVAL;
         goto __write_end;
     }
 

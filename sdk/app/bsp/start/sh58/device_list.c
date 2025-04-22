@@ -122,7 +122,11 @@ SD0_PLATFORM_DATA_END()
 extern const struct device_operations mass_storage_ops;
 REGISTER_DEVICES(device_table) = {
 #if (EXT_FLASH_EN)
+#if TCFG_USB_EXFLASH_UDISK_ENABLE
+    {.name = __EXT_FLASH_NANE, .ops = &norflash_dev_ops, .priv_data = (void *) &norflash_data},
+#else
     {.name = __EXT_FLASH_NANE, .ops = &norfs_dev_ops, .priv_data = (void *) &norflash_data},
+#endif
 #endif
     {.name = __SFC_NANE, .ops = &tzflash_dev_ops, .priv_data = (void *)NULL},
 #if TFG_SD_EN

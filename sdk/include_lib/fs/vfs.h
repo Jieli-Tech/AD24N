@@ -147,6 +147,7 @@ u32 vfs_fs_close(void **ppvfs);
 u32 vfs_file_name(void *pvfile, void *name, u32 len);
 int vfs_get_attrs(void *pvfile, void *pvfs_attr);
 int vfs_ioctl(void *pvfile, int cmd, int arg);
+int vfs_delete_dir(void *pvfs, char *path);
 
 #define VFS_FILE_NAME_LEN			16
 extern char g_file_sname[VFS_FILE_NAME_LEN];

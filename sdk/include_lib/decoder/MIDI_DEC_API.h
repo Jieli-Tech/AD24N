@@ -7,17 +7,16 @@
 
 typedef struct _MIDI_CONFIG_PARM_ {
 
-    unsigned char *spi_pos;     //  音色文件地址
+    unsigned short *spi_pos;		//	音色文件地址
     unsigned char sample_rate;  //  采样率0 - 8 对应采样率表{48000,44100,32000,24000,22050,16000,12000,11025,8000}
     short player_t;             //  最多同时发声的key数
 } MIDI_CONFIG_PARM;
 
 extern audio_decoder_ops *get_midi_ops();
 extern int get_midi_tone_compressor(void *work_buf);
-extern const int MIDI_MAX_MARK_CNT;
+// extern const int MIDI_MAX_MARK_CNT;
 
 
-#define  VOL_Norm_Bit       12
 
 #define  CTRL_CHANNEL_NUM   16
 

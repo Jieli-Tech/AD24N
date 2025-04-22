@@ -41,10 +41,10 @@ typedef struct _EFFECT_OBJ__ {
 } EFFECT_OBJ;
 
 int sound_output(void *priv, void *data, int len);
-
+int sound_input(void *priv, void *data, int len);
 void kick_sound(void *_sound);
 void stream_sound_init(void *psound, void *kick);
 void stream_sound_uninit(void);
-
+bool sound_out_init(sound_out_obj *psound, void *cbuf, u8 info);
 #endif
 

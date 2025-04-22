@@ -10,11 +10,12 @@
 #define SUPPORT_SPI2  1   //是否使能spi2
 #define SPI2_SUPPORT_UNIDIR_4BIT  0   //spi 4bit
 
+#define HW_SPI_MAX_NUM    3
+
 typedef enum spi_index {
     HW_SPI0, //SPI0系统已使用
     HW_SPI1,
     HW_SPI2,
-    HW_SPI_MAX_NUM,
 } hw_spi_dev;
 
 enum spi_bit_mode {

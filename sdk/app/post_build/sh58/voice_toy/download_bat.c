@@ -29,7 +29,7 @@ copy app.bin voice_toy/app.bin
 
 
 cd voice_toy
-isd_download.exe -tonorflash -dev sh58 -boot 0x304000 -div8 -wait 300 -uboot uboot.boot  -app app.bin 0x30000 -res dir_a dir_song dir_eng dir_poetry dir_story dir_bin_f1x dir_midi midi_cfg dir_notice
+isd_download.exe -tonorflash -dev sh58 -boot 0x304000 -div8 -wait 300 -uboot uboot.boot  -app app.bin 0x40000 -res dir_a dir_song dir_eng dir_poetry dir_story dir_bin_f1x dir_midi midi_cfg dir_notice
 
 @REM
 @rem -format vm
@@ -51,11 +51,9 @@ isd_download.exe -tonorflash -dev sh58 -boot 0x304000 -div8 -wait 300 -uboot ubo
 @rem //              C:PA06,PA07,PA08[CLK,DO,DI]; D:PB08,PB09,PB07[CLK,DO,DI]
 
 @REM //生成固件升级文件
-@rem //fw_add.exe -noenc -fw jl_isd.fw -add ota.bin -type 100 -out jl_isd.fw
-@rem //ufw_maker.exe -fw_to_ufw jl_isd.fw
-@rem //copy jl_isd.ufw update.ufw
-@rem //del jl_isd.ufw
-
+ufw_maker.exe -fw_to_ufw jl_isd.fw
+copy jl_isd.ufw update.ufw
+del jl_isd.ufw
 
 ping /n 2 127.1>null
 IF EXIST null del null

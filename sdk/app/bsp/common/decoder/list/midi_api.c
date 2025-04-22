@@ -34,8 +34,9 @@ static MIDI_INIT_STRUCT init_info       AT(.midi_buf);
 dec_obj dec_midi_hld;
 cbuffer_t cbuf_midi                     AT(.midi_buf);
 u16 obuf_midi[MIDI_DEC_OBUF_SIZE / 2]   AT(.midi_buf);
-u32 midi_decode_buff_full[(5292 + 3) / 4]    AT(.midi_buf);
-u32 midi_decode_buff_nomark[(3948 + 3) / 4]  AT(.midi_buf);
+/* u32 midi_decode_buff_full[(5292 + 3) / 4]    AT(.midi_buf); */
+/* u32 midi_decode_buff_nomark[(3948 + 3) / 4]  AT(.midi_buf); */
+u32 midi_decode_buff_nomark[4436 / 4]  AT(.midi_buf);
 /* #define MIDI_CAL_BUF ((void *)&midi_decode_buff[0]) */
 
 
@@ -101,19 +102,20 @@ u32 midi_decode_api(void *p_file, void **ppdec, void *p_dp_buf)
 
     u32 cal_buf_len;
     void *p_cal_buf;
-    if (MIDI_MAX_MARK_CNT) {
-        cal_buf_len = sizeof(midi_decode_buff_full);
-        p_cal_buf = midi_decode_buff_full;
-    } else {
-        cal_buf_len = sizeof(midi_decode_buff_nomark);
-        p_cal_buf = midi_decode_buff_nomark;
-    }
+    /* if (MIDI_MAX_MARK_CNT) { */
+    /* cal_buf_len = sizeof(midi_decode_buff_full); */
+    /* p_cal_buf = midi_decode_buff_full; */
+    /* } else { */
+    cal_buf_len = sizeof(midi_decode_buff_nomark);
+    p_cal_buf = midi_decode_buff_nomark;
+    /* } */
     memset(p_cal_buf, 0, cal_buf_len);
 
     dec_midi_hld.type = D_TYPE_MIDI;
 
     ops = get_midi_ops();
     buff_len = ops->need_dcbuf_size();
+    log_info("midi cal_buf_len %d\n", cal_buf_len);
     log_info("MIDI_DEC Need Buff Len:%d\n", buff_len);//buff大小会随MAX_DEC_PLAYER_CNT改变
     if (buff_len > cal_buf_len) {
         return E_MIDI_DBUF;
@@ -144,7 +146,7 @@ u32 midi_decode_api(void *p_file, void **ppdec, void *p_dp_buf)
     /**************相对MP3的调用流程多了这个，其他一致。这个一定要配置***************/
     midi_t_parm.player_t = MAX_DEC_PLAYER_CNT;                                //设置需要合成的最多按键个数，8到32可配
     midi_t_parm.sample_rate = midi_musicsr_to_cfgsr(sr);                            //采样率设为16k
-    midi_t_parm.spi_pos = (u8 *)midi_tone_tab;                    //spi_memory为音色文件数据起始地址
+    midi_t_parm.spi_pos = (u16 *)midi_tone_tab;                    //spi_memory为音色文件数据起始地址
     /* log_info_hexdump(midi_t_parm.spi_pos, 16); */
     memset((u8 *)&init_info, 0x00, sizeof(init_info));
     init_info.init_info = midi_t_parm;

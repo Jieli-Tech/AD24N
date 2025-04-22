@@ -99,15 +99,14 @@ extern const struct tzspi_target tzspi_target_end[];
 
 
 // int tzflash_init(void *arg);
-// int tzflash_origin_read(u8 *buf, u32 offset, u32 len);
-// int tzflash_read(void *buf, u32 len, u32 offset);
-// int tzflash_write(const void *buf, u32 len, u32 offset);
-// int tzflash_ioctl(u32 cmd, u32 arg);
-// void tzflash_dump();
+int tzflash_origin_read(struct device *device, u8 *buf, u32 len, u32 offset);
+int tzflash_read(struct device *device, void *buffer, u32 len, u32 addr);
+int tzflash_write(struct device *device, void *buffer, u32 len, u32 addr);
+int tzflash_ioctl(struct device *device, u32 cmd, u32 arg);
+void tzflash_dump();
 //
 // u32 sfc0_flash_addr2cpu_addr(u32 offset);
 // void tzflash_read_uuid(u8 *buf);
-// u8 *tzflash_get_uuid(void);
 //
 // u32 tzflash_erase_otp();
 // u32 tzflash_read_otp(void *buf, u32 len, u32 addr);
@@ -119,7 +118,9 @@ extern const struct tzspi_target tzspi_target_end[];
 // void tzflash_mutex_enter();
 // void tzflash_mutex_exit();
 
-u32 tzflash_set_write_protect(u8 lock, u32 saddr, u32 eaddr);
+u32 syscfg_read_otp(u32 id, u8 *buf, u32 len);
+u8 *tzflash_get_uuid(void);
+int tzflash_set_write_protect(u8 lock, u32 saddr, u32 eaddr);//return:实际结束地址
 void tzflash_change_mode();//dtr(clk),continue,wps
 #endif
 

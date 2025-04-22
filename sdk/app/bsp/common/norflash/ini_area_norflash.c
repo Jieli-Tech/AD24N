@@ -31,7 +31,7 @@
 #define MAX_INI_AREA_NUM    1   //ini开辟的空间个数,根据需要调整
 #define INI_AREA_BASE_PATH  "/app_area_head/"
 
-extern const struct device_operations sfc_dev_ops;
+extern const struct device_operations tzflash_dev_ops;
 struct ini_area_norflash_partition {
     const char *name;
     u32 start_addr;
@@ -110,7 +110,7 @@ int ini_area_norflash_dev_init(const struct dev_node *node, void *arg)
         return 1;
     }
 
-    return sfc_dev_ops.init(node, NULL);
+    return tzflash_dev_ops.init(node, NULL);
 }
 
 int ini_area_norflash_dev_open(const char *name, struct device **device, void *arg)
@@ -122,7 +122,7 @@ int ini_area_norflash_dev_open(const char *name, struct device **device, void *a
         return 1;
     }
 
-    err = sfc_dev_ops.open(name, device, arg);
+    err = tzflash_dev_ops.open(name, device, arg);
     *device = &info->device;
     (*device)->private_data = (void *)info;
 
@@ -141,7 +141,7 @@ int ini_area_norflash_byte_read(struct device *device, void *buf, u32 len, u32 o
         len = info->size - offset;
     }
     real_offset = offset + info->start_addr;
-    return sfc_dev_ops.read(device, buf, len, real_offset);
+    return tzflash_dev_ops.read(device, buf, len, real_offset);
 }
 
 int ini_area_norflash_byte_write(struct device *device, void *buf, u32 len, u32 offset)
@@ -156,7 +156,7 @@ int ini_area_norflash_byte_write(struct device *device, void *buf, u32 len, u32 
         len = info->size - offset;
     }
     real_offset = offset + info->start_addr;
-    return sfc_dev_ops.write(device, buf, len, real_offset);
+    return tzflash_dev_ops.write(device, buf, len, real_offset);
 }
 
 int ini_area_norflash_ioctl(struct device *device, u32 cmd, u32 arg)
@@ -183,7 +183,7 @@ __ini_area_earse:
         if ((align_addr + erase_size) > info->size) {
             return -EINVAL;
         }
-        ret = sfc_dev_ops.ioctl(device, cmd, align_addr + info->start_addr);
+        ret = tzflash_dev_ops.ioctl(device, cmd, align_addr + info->start_addr);
         break;
     case IOCTL_GET_CAPACITY:
         *((int *)arg) = info->size;

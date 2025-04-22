@@ -24,6 +24,7 @@ void log_uart_init(u32 freq)
         .tx_pin = TCFG_UART_TX_PORT,
         .rx_pin = TCFG_UART_RX_PORT,
     };
+    uart_clk_src_std48m();
     uart_init(DEBUG_UART_NUM, &debug_uart_config);
 
 }

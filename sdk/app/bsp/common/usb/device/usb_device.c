@@ -106,7 +106,14 @@ int usb_device_mode(const usb_dev usb_id, const u32 class)
         log_info("add desc std cdc");
     }
 #endif
-
+#if USB_DEVICE_CLASS_CONFIG & MIDI_CLASS
+    extern u32 midi_desc_config(const usb_dev usb_id, u8 * ptr, u32 * cur_itf_num);
+    if ((class & MIDI_CLASS) == MIDI_CLASS) {
+        msd_register(usb_id);
+        usb_add_desc_config(usb_id, class_index++, midi_desc_config);
+        log_info(">>>>> add desc midi <<<<<");
+    }
+#endif
     usb_device_init(usb_id);
     user_setup_filter_install(usb_id2device(usb_id));
     return 0;

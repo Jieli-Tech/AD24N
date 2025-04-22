@@ -32,7 +32,7 @@ MIDI_CTRL_PARM midi_ctrl_parmt                  AT(.midi_ctrl_buf);
 dec_obj dec_midi_ctrl_hld;
 cbuffer_t cbuf_midi_ctrl                        AT(.midi_ctrl_buf);
 u16 obuf_midi_ctrl[DAC_DECODER_BUF_SIZE / 2]    AT(.midi_ctrl_buf);
-u32 midi_ctrl_decode_buff[(4076) / 4]       AT(.midi_ctrl_buf);
+u32 midi_ctrl_decode_buff[(4564) / 4]       AT(.midi_ctrl_buf);
 #define MIDI_CTRL_CAL_BUF ((void *)&midi_ctrl_decode_buff[0])
 
 
@@ -81,7 +81,7 @@ u32 midi_ctrl_decode_api(void *p_file, void **ppdec, void *p_dp_buf)
     //
     midi_ctrl_t_parm.player_t = MAX_CTR_PLAYER_CNT;                                //设置需要合成的最多按键个数，8到32可配
     midi_ctrl_t_parm.sample_rate = 2;//0:48k,1:44.1k,2:32k,3:24k,4:22.050k,5:16k,6:12k,7:11.025k,8:8k
-    midi_ctrl_t_parm.spi_pos = (u8 *)midi_ctrl_tone_tab;                    //spi_memory为音色文件数据起始地址
+    midi_ctrl_t_parm.spi_pos = (u16 *)midi_ctrl_tone_tab;                    //spi_memory为音色文件数据起始地址
 
     midi_ctrl_parmt.output = mp_output;          //这个是最后的输出函数接口，
     midi_ctrl_parmt.tempo = 1000;

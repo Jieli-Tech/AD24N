@@ -24,5 +24,45 @@
             "problemMatcher": [],
             "group": "build"
         }
+        ,{
+            "label": "ad24n_voice_enhanced",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/winmk.bat ad24n_voice_enhanced"
+            },
+            "command": "make ad24n_voice_enhanced -j`nproc`",
+            "problemMatcher": [],
+            "group": "build"
+        }
+        ,{
+            "label": "ad24n_voice_toy",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/winmk.bat ad24n_voice_toy"
+            },
+            "command": "make ad24n_voice_toy -j`nproc`",
+            "problemMatcher": [],
+            "group": "build"
+        }
+        ,{
+            "label": "clean_ad24n_voice_enhanced",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/winmk.bat clean_ad24n_voice_enhanced"
+            },
+            "command": "make clean_ad24n_voice_enhanced -j`nproc`",
+            "problemMatcher": [],
+            "group": "build"
+        }
+        ,{
+            "label": "clean_ad24n_voice_toy",
+            "type": "shell",
+            "windows": {
+                "command": ".vscode/winmk.bat clean_ad24n_voice_toy"
+            },
+            "command": "make clean_ad24n_voice_toy -j`nproc`",
+            "problemMatcher": [],
+            "group": "build"
+        }
     ]
 }

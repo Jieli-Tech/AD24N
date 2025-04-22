@@ -41,7 +41,7 @@ AD24N 系列通用MCU SDK 固件程序
 
 * SDK 版本信息 : [SDK 历史版本](./doc/AD24N_SDK_发布版本信息.pdf)
 
-* SDK 介绍文档 : [SDK 快速开始简介](./doc/AD24N_SDK手册_v1.0.pdf)
+* SDK 介绍文档 : [SDK 快速开始简介](./doc/AD24N_SDK手册_v1.1.pdf)
 
 * SDK 在线文档 : [SDK 在线文档](https://doc.zh-jieli.com/AD24/zh-cn/master/index.html)
 

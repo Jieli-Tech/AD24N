@@ -84,8 +84,12 @@
 
 //  驱动使能
 #define EXT_FLASH_EN 1 //  外挂资源flash使能
-#define TFG_SD_EN 0 //  SDMMC驱动使能
+#define FLASH_CACHE_ENABLE 0
+
+#define TFG_SD_EN 1 //  SDMMC驱动使能
 
 //  文件系统
 #define NORFS_EN 1 //  NORFS文件系统使能
+#define DUFAULT_FAT "simple_fat"
+#define FREE_FS_EN 0 //  FREEFS文件系统使能
 #endif

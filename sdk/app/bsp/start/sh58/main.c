@@ -19,9 +19,6 @@
 #include "efuse.h"
 #include "asm/power_interface.h"
 #include "clock.h"
-#if defined(ICACHE_RAM_TO_RAM_ENABLE) && (ICACHE_RAM_TO_RAM_ENABLE == 1)
-#include "icache.h"
-#endif
 /* #include "vm_api.h" */
 /* #include "power_api.h" */
 
@@ -41,10 +38,10 @@ void critical_hook_init()
 
 void maskrom_init(void)
 {
-    log_info("maskrom_init\n");
+    /* log_info("maskrom_init\n"); */
     struct maskrom_argv argv;
     memset((void *)&argv, 0, sizeof(struct maskrom_argv));
-    argv.pchar = (void *)putchar;
+    argv.pchar = (void *)putchar; //sh58 maskrom 没有包含print驱动
     argv.exp_hook = exception_analyze;
     argv.local_irq_enable = NULL;
     argv.local_irq_disable = NULL;
@@ -59,47 +56,47 @@ extern void app(void);
 extern void emu_init(void);
 extern void exception_analyze(unsigned int *sp);
 
-#if defined(ICACHE_RAM_TO_RAM_ENABLE) && (ICACHE_RAM_TO_RAM_ENABLE == 1)
-extern int cache_ram_addr[];
-extern int cache_ram_begin[];
-extern int cache_ram_size[];
-
-AT(.common)
-void change_icache(void)
+/*----------------------------------------------------------------------------*/
+/**@brief   电源以及时钟初始化，此函数严禁修改！！！！！！！
+   @author  liujie
+   @note    void immutable_initialize_clock_power()
+*/
+/*----------------------------------------------------------------------------*/
+void immutable_initialize_clock_power()
 {
-    IcuDisable();
-    IcuInitial();
-    IcuSetWayNum(4 - ICACHE_RAM_TO_RAM / 4096);
-    memcpy((void *)cache_ram_addr, (void *)cache_ram_begin, (unsigned long)cache_ram_size);
-}
-#endif
-
-
-int c_main(int cfg_addr)
-{
-#if defined(ICACHE_RAM_TO_RAM_ENABLE) && (ICACHE_RAM_TO_RAM_ENABLE == 1)
-    change_icache();
-#endif
-    maskrom_init();
+    //此函数涉及电源和时钟的初始化，有严格的顺序要求，严禁对此函数的修改。
     efuse_init();
     critical_hook_init();
     early_system_init();
     clock_set_sfc_max_freq(SPI_MAX_CLK);
     clk_voltage_init(CLOCK_MODE_ADAPTIVE, DVDD_VOL_123V);
+
+    //----clk_early_init函数运行期间禁止打印，否则有死机风险！！！！！！！！
+    //----clk_early_init运行启动会停时钟，所有有参考时钟的外设全部会受影响，影响不限于程序卡死及外设运行失常。
+    register_handle_printf_putchar(NULL);
     clk_early_init(PLL_REF_LRC, 200000, PLL_MAX_LIMIT);
     register_handle_printf_putchar(putchar);
-    log_init(1000000);
-
-    wdt_init(WDT_8S);
-
-    log_info("--------sh58-apps-------------\n");
-    clock_dump();
-    efuse_dump();
 
     power_early_flowing();
-    sys_pll_ldo_trim_check();
-    board_power_init();
 
+    //----sys_pll_ldo_trim_check函数运行期间禁止打印，否则有死机风险！！！！！！！！
+    //----sys_pll_ldo_trim_check运行启动会停时钟，所有有参考时钟的外设全部会受影响，影响不限于程序卡死及外设运行失常。
+    sys_pll_ldo_trim_check();//该函数会短暂关闭pll,std
+    board_power_init();
+    clock_dump();
+    efuse_dump();
+    power_later_flowing();
+}
+
+int c_main(int cfg_addr)
+{
+    maskrom_init();
+    wdt_init(WDT_8S);
+
+    register_handle_printf_putchar(putchar);
+    log_init(1000000);
+    log_info("--------sh58 apps-------------\n");
+    immutable_initialize_clock_power();
     log_info("hello world\n");
 
     /* log_info("flash_size 0x%x\n", boot_info.flash_size); */
@@ -114,8 +111,6 @@ int c_main(int cfg_addr)
     /* audio_adc_test_demo(); */
 
     system_init();
-
-    power_later_flowing();
 
     app();
     while (1) {

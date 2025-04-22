@@ -11,6 +11,7 @@ u16 get_appbin_crc16_value(void);
 void set_crc16_reg_value(u16 value);
 u16 get_crc16_reg_value();
 u32 *get_crc16_fifo_ptr();
+u16 CRC16_with_initval(void *ptr, u32  len, u32 init);
 
 #endif
 

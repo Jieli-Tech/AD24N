@@ -436,7 +436,7 @@ LIBPATHS := \
 
 LIBS := \
 	C:/JL/pi32/lib/large/libc.a \
-	C:/JL/pi32/lib/large/llibm.a \
+	C:/JL/pi32/lib/large/libm.a \
 	C:/JL/pi32/lib/large/libcompiler-rt.a \
 
 

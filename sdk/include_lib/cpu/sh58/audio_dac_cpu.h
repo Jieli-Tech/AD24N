@@ -72,9 +72,9 @@ extern const u8 au_const_adda_common_en;
       DAC1_DFIFO_SYNC  \
     )
 
-
+#ifndef SR_DEFAULT
 #define SR_DEFAULT  32000
-
+#endif
 
 typedef struct _DAC_CTRL_HDL {
     void *buf;

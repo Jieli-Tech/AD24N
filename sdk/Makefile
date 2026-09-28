@@ -8,13 +8,14 @@
 # 支持的目标
 # make ad24n_voice_enhanced
 # make ad24n_voice_toy
+# make ad24n_aec_decode
 
-.PHONY: all clean ad24n_voice_enhanced ad24n_voice_toy clean_ad24n_voice_enhanced clean_ad24n_voice_toy
+.PHONY: all clean ad24n_voice_enhanced ad24n_voice_toy ad24n_aec_decode clean_ad24n_voice_enhanced clean_ad24n_voice_toy clean_ad24n_aec_decode
 
-all: ad24n_voice_enhanced ad24n_voice_toy
+all: ad24n_voice_enhanced ad24n_voice_toy ad24n_aec_decode
 	@echo +ALL DONE
 
-clean: clean_ad24n_voice_enhanced clean_ad24n_voice_toy
+clean: clean_ad24n_voice_enhanced clean_ad24n_voice_toy clean_ad24n_aec_decode
 	@echo +CLEAN DONE
 
 ad24n_voice_enhanced:
@@ -28,3 +29,9 @@ ad24n_voice_toy:
 
 clean_ad24n_voice_toy:
 	$(MAKE) -C . -f Makefile.ad24n_voice_toy clean
+
+ad24n_aec_decode:
+	$(MAKE) -C . -f Makefile.ad24n_aec_decode
+
+clean_ad24n_aec_decode:
+	$(MAKE) -C . -f Makefile.ad24n_aec_decode clean

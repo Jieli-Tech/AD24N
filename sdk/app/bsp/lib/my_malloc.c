@@ -1,7 +1,7 @@
 
 #include "my_malloc.h"
 
-
+// #define LOG_TAG_CONST       NORM
 #define LOG_TAG_CONST       HEAP
 #define LOG_TAG             "[malloc]"
 #include "log.h"

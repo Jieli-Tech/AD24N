@@ -244,8 +244,10 @@ void system_init(void)
 
     /* #if defined(UPDATE_V2_EN) && (1 == UPDATE_V2_EN) */
     //升级初始化
+#if defined(HAS_UPDATE_EN) && (1 == HAS_UPDATE_EN)
     int app_update_init(void);
     app_update_init();
+#endif
     /* #endif */
 
 }

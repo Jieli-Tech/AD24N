@@ -74,8 +74,10 @@ UTBD = 1000000; //uboot串口波特率
 //# 外部FLASH 硬件连接配置
 //#EX_FLASH=PA06_1A_NULL;   //CS_pin / spi (0/1/2) /port(A/B) / power_io
 //#EX_FLASH_IO=2_PA10_PA09_PA07_NULL_NULL;  //data_width / CLK_pin / DO_pin / DI_pin / D2_pin / D3_pin   当data_width为4的时候，D2_pin和D3_pin才有效
+#if EXT_FLASH_EN
 EX_FLASH = PA05_1A_NULL;    //CS_pin / spi (0/1/2) /port(A/B) / power_io
 EX_FLASH_IO = 2_PA11_PA12_PA10_NULL_NULL;   //data_width / CLK_pin / DO_pin / DI_pin / D2_pin / D3_pin   当data_width为4的时候，D2_pin和D3_pin才有效
+#endif
 
 //#############################################################################################################################################
 

@@ -142,18 +142,31 @@
 #define TCFG_LOWPOWER_VDDIOW_LEVEL          VDDIOW_VOL_28V               //弱VDDIO等级配置
 #define TCFG_LOWPOWER_OSC_TYPE              OSC_TYPE_LRC
 #define TCFG_LOWPOWER_SOFF                  1
-#define TCFG_LOWPOWER_OVERLAY               0
+#define TCFG_LOWPOWER_OVERLAY               1
 
 /*---------------UPDATE---------------------*/
+#if (HAS_UPDATE_EN)
 #define TFG_DEV_UPGRADE_SUPPORT             ENABLE
+#endif
+
 #define TFG_UPGRADE_FILE_NAME               "/update.ufw"
 #define TESTBOX_UART_UPDATE_EN                 0
 #define CONFIG_APP_OTA_EN                      0
 #define TESTBOX_BT_UPDATE_EN                   0
+
+#ifdef HAS_SDMMC_EN
 //  SD卡设备升级
+#if defined(UDISK_UPDATE_EN) && (UDISK_UPDATE_EN == 1)
 #define SD_UPDATE_EN                           1
+#endif
+#endif
+
+#if defined(HAS_USB_EN) && (HAS_USB_EN == 1)
+#if defined(UDISK_UPDATE_EN) && (UDISK_UPDATE_EN == 1)
 //  U盘设备升级
 #define UDISK_UPDATE_EN                        1
+#endif
+#endif
 
 #include "app_config_private.h"
 

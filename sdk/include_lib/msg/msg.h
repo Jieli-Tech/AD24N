@@ -208,7 +208,9 @@ enum {
 #define MSG_TYPE_BIT_LEN        12
 #define MSG_PARAM_BIT_LEN       (MSG_HEADER_BYTE_LEN*8-MSG_TYPE_BIT_LEN)
 
+#ifndef MAX_POOL
 #define MAX_POOL			128
+#endif
 
 #define NO_EVENT			0xffff
 

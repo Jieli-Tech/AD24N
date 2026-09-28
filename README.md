@@ -208,7 +208,7 @@ fw-AD24N/
 ├── doc/                           # 文档
 │   ├── ad24n硬件文档/              #   硬件文档（规格书/原理图/开发板资料）
 │   ├── stuff/                     #   杂项（钉钉群、烧录工具文档等）
-│   ├── AD24N_SDK手册_v1.1.pdf     #   SDK 手册
+│   ├── AD24N_SDK手册_v1.3.pdf     #   SDK 手册
 │   ├── AD24N_SDK_发布版本信息.pdf  #   SDK 发布版本信息
 │   ├── AD24N用户手册V1.2.pdf       #   芯片用户手册
 │   └── 杰理科技32位AD系列语音MCU选型表.pdf  # 芯片选型表
@@ -354,7 +354,7 @@ A: 使用 `-j` 参数进行并行编译，如 `make -j4`（数字为并行任务
 |------|------|
 | 📖 **在线文档中心** | [doc.zh-jieli.com/AD24](https://doc.zh-jieli.com/AD24/zh-cn/master/index.html) |
 | 📚 **SDK 版本历史** | [SDK 发布版本信息](AD24N_SDK_发布版本信息.pdf) |
-| 🔧 **SDK 快速入门** | [SDK 手册](doc/AD24N_SDK手册_v1.1.pdf) |
+| 🔧 **SDK 快速入门** | [SDK 手册](doc/AD24N_SDK手册_v1.3.pdf) |
 | 📖 **芯片用户手册** | [AD24N 用户手册](doc/AD24N用户手册V1.2.pdf) |
 | 📄 **芯片选型** | [选型表](doc/杰理科技32位AD系列语音MCU选型表.pdf) |
 | 🎬 **视频教程** | [Bilibili 主页](https://space.bilibili.com/3493277347088769/dynamic) |

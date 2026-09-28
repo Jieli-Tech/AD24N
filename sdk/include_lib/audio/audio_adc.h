@@ -40,5 +40,4 @@ void audio_adc_disable(void);
 void auin_mode_init(void);
 u32 auin_init(u32 sr, ADC_MODE mode, u32 throw_cnt);
 void auin_off_api(void);
-void audio_adc_trim(void);
 #endif

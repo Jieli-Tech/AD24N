@@ -53,7 +53,11 @@ typedef struct _f1x_data {
 } f1x_data;
 
 f1x_data g_f1x1_data AT(.f1a_1_buf);
+
+
+#if (MAX_F1A_CHANNEL > 1)
 f1x_data g_f1x2_data AT(.f1a_2_buf);
+#endif
 
 const struct if_decoder_io f1a_dec_io[MAX_F1A_CHANNEL] = {
     {
@@ -226,8 +230,13 @@ u32 f1a_1_buff_api(dec_buf *p_dec_buf)
 
 u32 f1a_2_buff_api(dec_buf *p_dec_buf)
 {
+#if (MAX_F1A_CHANNEL > 1)
     p_dec_buf->start = (u32)&f1a_2_buf_start[0];
     p_dec_buf->end   = (u32)&f1a_2_buf_end[0];
     return 0;
+#else
+    return E_F1A_OUTRGE;
+
+#endif
 }
 #endif

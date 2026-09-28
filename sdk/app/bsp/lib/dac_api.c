@@ -145,6 +145,12 @@ bool dac_cbuff_active(void *sound_hld)
     }
 }
 
+
+__attribute__((weak)) void record_dac(u8 *buf, u32 len)
+{
+
+}
+
 //extern void audac_test_tab_read(void *buff, u32 len);
 
 AT(.audio_d.text.cache.L2)
@@ -248,6 +254,8 @@ u32 fill_dac_fill_phy(u8 *buf, u32 len)
         }
         dac_kick_decoder(dac_mge.sound[i], dac_mge.kick[i]);
     }
+
+    record_dac(buf, len);
     return len;
 }
 

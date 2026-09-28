@@ -66,6 +66,7 @@ static u32 music_file_open(void *pvfs, void **ppvfile, const char *path, u32 fin
     u32 err = 0;
 
     /* findex等于0时，按路径播放 */
+    log_info("vfs_openbypath :%s\n", path);
     err = vfs_openbypath(pvfs, ppvfile, path);
     if (err) {
         log_error("vfs_openbypath err:0x%x\n", err);

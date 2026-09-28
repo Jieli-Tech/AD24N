@@ -19,19 +19,17 @@ if exist %NAME%.elf (
 %OBJCOPY% -O binary -j .data %NAME%.elf data.bin
 %OBJCOPY% -O binary -j .debug_data %NAME%.elf debug_data.bin
 %OBJCOPY% -O binary -j .lowpower_overlay %NAME%.elf lowpower_overlay.bin
-
 %OBJDUMP% -section-headers %NAME%.elf
 %OBJDUMP% -t %NAME%.elf > %NAME%.symbol.txt
 
-
 copy /b %NAME%.bin+data.bin+debug_data.bin+lowpower_overlay.bin app.bin
-copy app.bin voice_enhanced/app.bin
+copy app.bin aec_decode/app.bin
 
 )
 
 
-cd voice_enhanced
-isd_download.exe -tonorflash -dev sh58 -boot 0x304000 -div8 -wait 300 -uboot uboot.boot -app app.bin 0x40000 -res dir_a dir_song dir_eng dir_poetry dir_story dir_bin_f1x dir_midi midi_cfg dir_notice
+cd aec_decode
+isd_download.exe -tonorflash -dev sh58 -boot 0x304000 -div8 -wait 300 -uboot uboot.boot -app app.bin 0x58000 -res dir_a dir_a_f1a_16_8
 
 @REM
 @rem -format vm

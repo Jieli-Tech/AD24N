@@ -46,6 +46,11 @@ void app_timer_loop(void)
 {
 
 }
+__attribute__((weak))
+void tick_2ms_loop(void)
+{
+
+}
 u16 g_tick_cnt = 0;
 void sys_tick_timer(u32 cnt)
 {
@@ -78,6 +83,7 @@ void tick_timer_loop()
 
     sys_tick_timer(g_tick_cnt);
     app_timer_loop();
+    tick_2ms_loop();
     modules_tick_timer(g_tick_cnt);
 
     if (0 == (g_tick_cnt % 250)) { //500ms

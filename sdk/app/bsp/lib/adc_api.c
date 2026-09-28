@@ -72,14 +72,37 @@ AT(.audio_a.text.cache.L2)
 void fill_audio_adc_fill(u8 *buf, u32 len)
 {
     u32 i;
+    u32 wlen = 0;
     for (i = 0; i < ADC_CHANNEL_NUMBER; i++) {
+
         if (0 == (audio_adc_mge.flag & BIT(i))) {
             continue;
         }
         if (0 == (audio_adc_mge.sound[i]->enable & B_DEC_RUN_EN)) {
             continue;
         }
-        cbuf_write(audio_adc_mge.sound[i]->p_obuf, buf, len);
+#if 0
+        s16 *p_data = (void *)buf;
+        s32 t_sp;
+        u32 tlen = len / 2;
+        for (u32 i = 0; i < tlen; i++) {
+            t_sp = p_data[i];
+            /* AD24的AUDIO_ADC输出幅度在VCM电压不同的情况下, 与AD14的AUDIO_ADC输出幅度差距不一样，且AD24的输出幅度比AD14小 */
+            /* 如果需要达到AD14的输出幅度，可按照以下数据调整样点乘的系数 */
+            /* AD24的VCM为1.3V时，幅度相差约3.4倍；VCM为1.5V时,幅度相差约3.8倍；VCM为0.8V（即低压）时，幅度相差约2倍 */
+            t_sp = t_sp * 2;
+            if (t_sp > 32767) {
+                t_sp = 32767;
+            } else if (t_sp < -32767) {
+                t_sp = -32768;
+            }
+            p_data[i] = t_sp;
+        }
+#endif
+        wlen =  cbuf_write(audio_adc_mge.sound[i]->p_obuf, buf, len);
+        if (wlen < len) {
+            log_char('w');
+        }
         /* if (audio_adc_mge.sound[i]->enable & B_REC_RUN) { */
         if (NULL !=  audio_adc_mge.kick[i]) {
             audio_adc_mge.kick[i](audio_adc_mge.sound[i]);

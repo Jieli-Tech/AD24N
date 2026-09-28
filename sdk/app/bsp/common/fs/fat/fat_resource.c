@@ -334,6 +334,11 @@ int fat_sel_api(struct vfscan *fsn, void *pfs, int sel_mode, void **ppfile, int 
     return fat_fsel(fsn, pfs, sel_mode, ppfile, arg);
 }
 
+int fat_format_api(void **p_fs_hdl, void *device, u32 clust_size, u8 create_new)
+{
+    return fat_format_deal(p_fs_hdl, device, clust_size, create_new);
+}
+
 int fat_ioctl_api(void *pfile, int cmd, int arg)
 {
     switch (cmd) {
@@ -357,6 +362,7 @@ const struct vfs_operations fat_vfs_ops sec_used(.vfs_operations) = {
     .createfile  = fat_openW_api,
     .read        = fat_read_api,
     .write       = fat_write_api,
+    .format      = fat_format_api,
     .seek        = fat_seek_api,
     .close_fs 	 = fat_fs_close_api,
     .close_file  = fat_file_close_api,

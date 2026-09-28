@@ -23,6 +23,8 @@ const int IRQ_PMU_TIMER1_IP = 0;
 const int IRQ_UART0_IP   = 3;
 const int IRQ_UART1_IP   = 3;
 const int IRQ_ALINK0_IP  = 3;
+//IRQ_NLP_IP 需要和解码同一优先级
+const int IRQ_NLP_IP     = 2;
 
 //*********************************************************************************//
 //                        vm_sfc Configuration                                     //

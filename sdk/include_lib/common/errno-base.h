@@ -232,5 +232,7 @@
 #define E_AUTRIM_ADC_NONLIN                     (0xE000 + 0x5)
 #define E_AUTRIM_NO_FIND_VB17                   (0xE000 + 0x6)
 
+#define E_AEC_DAC_NEED_SRC                      (0xE100 + 0x1)
+#define E_AEC_ADC_NEED_SRC                      (0xE100 + 0x2)
 
 #endif

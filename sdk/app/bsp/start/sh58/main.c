@@ -95,7 +95,7 @@ int c_main(int cfg_addr)
 
     register_handle_printf_putchar(putchar);
     log_init(1000000);
-    log_info("--------sh58 apps-------------\n");
+    log_info("--------sh58-apps-------------\n");
     immutable_initialize_clock_power();
     log_info("hello world\n");
 

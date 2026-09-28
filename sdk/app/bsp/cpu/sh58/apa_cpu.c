@@ -80,6 +80,42 @@ void apa_p_highz(void)
     SFR(JL_APA->APA_CON3, 16, 1, 0);     //CLASSD_P_EN_11v
 }
 
+void apa_p_output_set(APA_OUTPUT_MODE mode)
+{
+    if (mode == GPIO_OUTPUT_LOGIC0) {
+        SFR(JL_APA->APA_CON3, 16, 1, 0); //CLASSD_P_EN_11v
+        SFR(JL_APA->APA_CON3, 24, 1, 0); // apap sfr
+        SFR(JL_APA->APA_CON3, 22, 1, 1); // apa_pin_mux_sel, 0:apa_pin  1:apa_con[25]
+        SFR(JL_APA->APA_CON3, 14, 1, 1); //CLASSD_IOP_MODE_11v
+    } else if (mode == GPIO_OUTPUT_LOGIC1) {
+        SFR(JL_APA->APA_CON3, 16, 1, 0); //CLASSD_P_EN_11v
+        SFR(JL_APA->APA_CON3, 24, 1, 1); // apap sfr
+        SFR(JL_APA->APA_CON3, 22, 1, 1); // apa_pin_mux_sel, 0:apa_pin  1:apa_con[25]
+        SFR(JL_APA->APA_CON3, 14, 1, 1); //CLASSD_IOP_MODE_11v
+    } else {
+        apa_p_highz();
+    }
+}
+
+void apa_n_output_set(APA_OUTPUT_MODE mode)
+{
+    if (mode == GPIO_OUTPUT_LOGIC0) {
+        SFR(JL_APA->APA_CON3, 15, 1, 0); //CLASSD_N_EN_11v
+        SFR(JL_APA->APA_CON3, 25, 1, 0); // apan sfr
+        SFR(JL_APA->APA_CON3, 23, 1, 1); // apa_nin_mux_sel, 0:apa_nin  1:apa_con[25]
+        SFR(JL_APA->APA_CON3, 13, 1, 1); //CLASSD_ION_MODE_11v
+    } else if (mode == GPIO_OUTPUT_LOGIC1) {
+        SFR(JL_APA->APA_CON3, 15, 1, 0); //CLASSD_N_EN_11v
+        SFR(JL_APA->APA_CON3, 25, 1, 1); // apan sfr
+        SFR(JL_APA->APA_CON3, 23, 1, 1); // apa_nin_mux_sel, 0:apa_nin  1:apa_con[25]
+        SFR(JL_APA->APA_CON3, 13, 1, 1); //CLASSD_ION_MODE_11v
+    } else {
+        apa_n_highz();
+    }
+
+}
+
+
 void dump_aps_sfr(void)
 {
     log_info("JL_APA->APA_CON0    = %8xH", JL_APA->APA_CON0);

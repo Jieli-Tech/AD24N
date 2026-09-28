@@ -168,13 +168,8 @@ int usb_slave_mic_read(u8 *buf, u32 len)//目前只考虑到单声道
         return (len);
     }
 __no_read:
-    if (rlen != len) {
-        /*log_char('.');*/
-        memset(buf + rlen, 0, len - rlen);
-        rlen = len;
-    }
 
-    return len;
+    return rlen;
 }
 
 

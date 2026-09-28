@@ -207,6 +207,7 @@ INCLUDES := \
 	-Iapp/bsp/common/usb \
 	-Iapp/bsp/common/usb/device \
 	-Iapp/bsp/common/usb/host \
+	-Iapp/bsp/common/src_to_buffer \
 	-Iapp/bsp/common/bt_common \
 	-I$(SYS_INC_DIR) \
 
@@ -266,6 +267,7 @@ c_SRC_FILES := \
 	app/bsp/common/sound_effect_list/voice_change/voicechanger.c \
 	app/bsp/common/sound_mge/sound_mge.c \
 	app/bsp/common/speaker/speak_api.c \
+	app/bsp/common/src_to_buffer/src_to_buffer.c \
 	app/bsp/common/update/dev_update.c \
 	app/bsp/common/update/update.c \
 	app/bsp/common/usb/device/cdc.c \
@@ -312,6 +314,7 @@ c_SRC_FILES := \
 	app/bsp/cpu/uart_debug.c \
 	app/bsp/lib/adc_api.c \
 	app/bsp/lib/audio.c \
+	app/bsp/lib/audio_dac_apa_switch.c \
 	app/bsp/lib/audio_mic_capless.c \
 	app/bsp/lib/common.c \
 	app/bsp/lib/dac_api.c \
@@ -418,6 +421,7 @@ LFLAGS := \
 	include_lib/liba/ARCH/pi32_lto/lib_voiceChanger_va.a \
 	include_lib/liba/ARCH/pi32_lto/lib_pcm_eq.a \
 	include_lib/liba/sh58/voice_toy/dual_bank_lib.a \
+	include_lib/liba/sh58/voice_toy/seq_buf_lib.a \
 	--end-group \
 	-Tapp/post_build/sh58/app.ld \
 	-M=app/post_build/sh58/app.map \

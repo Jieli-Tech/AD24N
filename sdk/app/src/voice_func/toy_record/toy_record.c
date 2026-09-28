@@ -29,7 +29,7 @@ void toy_record_app(void)
 {
     log_info("toy_record_app\n");
     int msg[2];
-    u32 err = 0;
+    //u32 err = 0;
     dec_obj *p_dec_obj = 0;
     u16 norfs_decode_type = BIT_A | BIT_UMP3 | BIT_SPEED;
     key_table_sel(record_key_msg_filter);
@@ -38,6 +38,7 @@ void toy_record_app(void)
     memset(&record_obj, 0, sizeof(record_obj));
 
     while (1) {
+        u32 err;
         err = get_msg(2, &msg[0]);
         bsp_loop();
         if (MSG_NO_ERROR != err) {
@@ -151,7 +152,7 @@ static int encode_start(Encode_Control *obj)
         return err;
     }
 
-#if ENCODER_UMP3_EN
+#if defined(ENCODER_UMP3_EN) && (ENCODER_UMP3_EN)
     obj->dev_index = INNER_FLASH_RW;//内置flash录音
     strcpy(obj->fs_name, "norfs");
     err = norfs_enc_file_create(obj);

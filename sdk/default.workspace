@@ -3,5 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="AD24N_voice_enhanced.cbp" />
 		<Project filename="AD24N_voice_toy.cbp" />
+		<Project filename="AD24N_aec_decode.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

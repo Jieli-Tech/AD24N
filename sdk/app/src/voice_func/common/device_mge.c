@@ -99,7 +99,7 @@ u32 device_close(u8 device_id)
 
 void *device_obj(u32 index)
 {
-    if ((index > MAX_DEVICE) || (INNER_FLASH_RO == index)) {
+    if ((index >= MAX_DEVICE) || (INNER_FLASH_RO == index)) {
         return 0;
     }
 
@@ -172,15 +172,10 @@ u32 device_update(char *t_dev_name, bool check_flag)
             return UPDATA_DEV_ERR;
         }
     }
-    if (!strcmp(t_dev_name, __UDISK0)) {
-        /* 暂不支持U盘升级 */
-        log_error("dev err %s\n", t_dev_name);
-        return UPDATA_DEV_ERR;
-    }
 
     log_info("dev name %s\n", t_dev_name);
 
-#if 1
+#if defined(SD_UPDATE_EN) || defined(UDISK_UPDATE_EN)
     //设备升级测试
     /* y_printf("\n >>>[test]:func = %s,line= %d\n", __FUNCTION__, __LINE__); */
     u16 dev_update_check(char *logo, bool check_flag);
@@ -191,8 +186,11 @@ u32 device_update(char *t_dev_name, bool check_flag)
     } else {
         t_cur_dev = NULL;
     }
-#endif
+
     return err;
+#else
+    return 0;
+#endif
 }
 #endif
 

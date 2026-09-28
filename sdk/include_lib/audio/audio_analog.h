@@ -35,4 +35,5 @@ u32 adc_analog_open(ADC_MODE mode, u32 ch);
 void adc_analog_close(void);
 void dacvdd_ldo(bool mode);
 
+void audio_adc_trim(void);
 #endif

@@ -61,4 +61,12 @@ bool is_apa_close_clear(void);
 void apa_n_highz(void);
 void apa_p_highz(void);
 bool audio_apa_analog_is_close_clear(void);
+
+typedef enum __APA_OUTPUT_MODE {
+    GPIO_OUTPUT_LOGIC0 = 0,
+    GPIO_OUTPUT_LOGIC1,
+    GPIO_HIGHZ,
+} APA_OUTPUT_MODE;
+void apa_p_output_set(APA_OUTPUT_MODE mode);
+void apa_n_output_set(APA_OUTPUT_MODE mode);
 #endif

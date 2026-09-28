@@ -208,7 +208,7 @@ fw-AD24N/
 ├── doc/                           # Documentation
 │   ├── ad24n硬件文档/              #   Hardware docs (datasheets / schematics / dev board)
 │   ├── stuff/                     #   Miscellaneous (DingTalk group, flashing tool docs, etc.)
-│   ├── AD24N_SDK手册_v1.1.pdf     #   SDK manual
+│   ├── AD24N_SDK手册_v1.3.pdf     #   SDK manual
 │   ├── AD24N_SDK_发布版本信息.pdf  #   SDK release notes
 │   ├── AD24N用户手册V1.2.pdf       #   Chip user manual
 │   └── 杰理科技32位AD系列语音MCU选型表.pdf  # Chip selection table
@@ -354,7 +354,7 @@ A: Use the `-j` flag for parallel compilation, e.g. `make -j4` (the number speci
 |------|------|
 | 📖 **Online Documentation Center** | [doc.zh-jieli.com/AD24](https://doc.zh-jieli.com/AD24/zh-cn/master/index.html) |
 | 📚 **SDK Release History** | [SDK Release Notes](doc/AD24N_SDK_发布版本信息.pdf) |
-| 🔧 **SDK Quick Start** | [SDK Manual](doc/AD24N_SDK手册_v1.1.pdf) |
+| 🔧 **SDK Quick Start** | [SDK Manual](doc/AD24N_SDK手册_v1.3.pdf) |
 | 📖 **Chip User Manual** | [AD24N User Manual](doc/AD24N用户手册V1.2.pdf) |
 | 📄 **Chip Selection Guide** | [Selection Table](doc/杰理科技32位AD系列语音MCU选型表.pdf) |
 | 🎬 **Video Tutorials** | [Bilibili Homepage](https://space.bilibili.com/3493277347088769/dynamic) |

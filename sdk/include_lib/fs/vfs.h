@@ -85,6 +85,7 @@ struct vfs_operations {
     void (*fscan_release)(struct vfscan *);
     int (*fsel)(struct vfscan *, void *, int sel_mode, void **, int);
     int (*file_crc)(void *pfile);
+    int (*format)(void **p_fs_hdl, void *device, u32 clust_size, u8 create_new);
 
 
 

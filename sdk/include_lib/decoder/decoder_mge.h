@@ -42,6 +42,7 @@ extern u32 dec_hld_tab[];
 void dac_kick_decoder(void *sound_hld, void *pkick);
 void kick_decoder(void);
 void decoder_soft_hook(void);
+void decoder_soft_exit(void);
 void irq_decoder_ret(dec_obj *obj, u32 ret);
 
 

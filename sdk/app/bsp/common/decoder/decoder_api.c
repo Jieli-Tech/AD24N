@@ -178,7 +178,7 @@ dec_obj *decoder_io(void *pfile, u32 dec_ctl, dp_buff *dbuff, u8 loop)
 
         //硬件src
         p_curr_sound->enable = 0;
-#if (defined(HAS_HW_SRC_EN) || defined(HAS_SW_SRC_EN))
+#if ((defined(HAS_HW_SRC_EN) || defined(HAS_SW_SRC_EN)) && (!defined(D_DECODE_NOT_USE_SRC)))
         if (SR_DEFAULT != p_dec->sr) {
 
             log_info("need src %d  %d\n", SR_DEFAULT, p_dec->sr);
@@ -195,6 +195,7 @@ dec_obj *decoder_io(void *pfile, u32 dec_ctl, dp_buff *dbuff, u8 loop)
         }
 #else
         /* DAC采样率配置成与文件采样率一致 */
+        log_info("decoder not use SRC");
         void dac_sr_api(u32 sr);
         dac_sr_api(p_dec->sr);
 #endif
@@ -269,6 +270,10 @@ void irq_decoder_ret(dec_obj *obj, u32 ret)
 void decoder_soft_hook(void)
 {
     d_mio_run();
+}
+void decoder_soft_exit(void)
+{
+
 }
 
 void decoder_pause(dec_obj *obj)

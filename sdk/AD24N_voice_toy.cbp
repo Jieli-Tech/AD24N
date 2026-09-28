@@ -125,6 +125,7 @@
 <Add directory="app/bsp/common/usb" />
 <Add directory="app/bsp/common/usb/device" />
 <Add directory="app/bsp/common/usb/host" />
+<Add directory="app/bsp/common/src_to_buffer" />
 <Add directory="app/bsp/common/bt_common" />
 </Compiler>
 <Linker>
@@ -168,6 +169,7 @@
 <Add option="include_lib/liba/ARCH/pi32_lto/lib_voiceChanger_va.a" />
 <Add option="include_lib/liba/ARCH/pi32_lto/lib_pcm_eq.a" />
 <Add option="include_lib/liba/sh58/voice_toy/dual_bank_lib.a" />
+<Add option="include_lib/liba/sh58/voice_toy/seq_buf_lib.a" />
 <Add option="--end-group" />
 <Add option="-Tapp/post_build/sh58/app.ld" />
 <Add option="-M=app/post_build/sh58/app.map" />
@@ -248,6 +250,8 @@
 <Unit filename="app/bsp/common/sound_mge/sound_mge.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/common/speaker/speak_api.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/common/spi_soft/spi_soft.h" />
+<Unit filename="app/bsp/common/src_to_buffer/src_to_buffer.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/bsp/common/src_to_buffer/src_to_buffer.h" />
 <Unit filename="app/bsp/common/update/dev_update.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/common/update/update.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/common/usb/device/cdc.c"><Option compilerVer="CC"/></Unit>
@@ -310,6 +314,7 @@
 <Unit filename="app/bsp/cpu/uart_debug.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/lib/adc_api.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/lib/audio.c"><Option compilerVer="CC"/></Unit>
+<Unit filename="app/bsp/lib/audio_dac_apa_switch.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/lib/audio_mic_capless.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/lib/common.c"><Option compilerVer="CC"/></Unit>
 <Unit filename="app/bsp/lib/dac_api.c"><Option compilerVer="CC"/></Unit>
@@ -383,6 +388,7 @@
 <Unit filename="include_lib/audio/audio.h" />
 <Unit filename="include_lib/audio/audio_adc.h" />
 <Unit filename="include_lib/audio/audio_analog.h" />
+<Unit filename="include_lib/audio/audio_dac_apa_switch.h" />
 <Unit filename="include_lib/audio/audio_signal.h" />
 <Unit filename="include_lib/audio/dac.h" />
 <Unit filename="include_lib/audio/dac_api.h" />
@@ -395,6 +401,7 @@
 <Unit filename="include_lib/audio/resample_api.h" />
 <Unit filename="include_lib/audio/reverb_api.h" />
 <Unit filename="include_lib/audio/src.h" />
+<Unit filename="include_lib/audio/src_noio.h" />
 <Unit filename="include_lib/common/boot.h" />
 <Unit filename="include_lib/common/circular_buf.h" />
 <Unit filename="include_lib/common/common.h" />
@@ -408,6 +415,7 @@
 <Unit filename="include_lib/common/my_malloc.h" />
 <Unit filename="include_lib/common/new_vm.h" />
 <Unit filename="include_lib/common/printf.h" />
+<Unit filename="include_lib/common/seq_buf.h" />
 <Unit filename="include_lib/common/tab_read.h" />
 <Unit filename="include_lib/common/tzflash.h" />
 <Unit filename="include_lib/common/vm.h" />

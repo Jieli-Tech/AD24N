@@ -58,8 +58,12 @@ static const char dir_ext_vm_tab[EXT_DIR_NUM] = {
 };
 #endif
 
+
+
 void toy_music_app(void)
 {
+
+
 #if KEY_IR_EN
     Sys_IRInput = 1;
 #endif
@@ -110,9 +114,12 @@ void toy_music_app(void)
     /* dec_pctl[2].dir_total   = sizeof(dir_inr_tab) / 4; */
     /* simple_dev_fs_mount(&dec_pctl[2]); */
 
-    post_msg(1, MSG_PLAY_FILE1);
-    /* post_msg(1, MSG_PLAY_FILE2); */
+
     /* post_msg(1, MSG_A_PLAY); */
+    post_msg(1, MSG_PLAY_FILE1);
+
+    /* post_msg(1, MSG_PLAY_FILE2); */
+
     /* simple_play_file_bypath(&dec_pctl[0], "/dir_song/so002.f1b"); */
 
     /* FIX文件播放msg start */
@@ -215,6 +222,9 @@ void toy_music_app(void)
         case MSG_CHANGE_WORK_MODE:
             goto __toy_music_exit;
         case MSG_500MS:
+            // extern void aec_kick_print();
+            // aec_kick_print();
+            /* log_char('5'); */
             if ((MUSIC_PLAY != get_decoder_status(dec_pctl[0].p_dec_obj)) && \
                 (MUSIC_PLAY != get_decoder_status(dec_pctl[1].p_dec_obj))) {
                 vm_pre_erase();

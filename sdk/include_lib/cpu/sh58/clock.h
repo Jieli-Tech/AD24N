@@ -133,7 +133,9 @@ void uart_clk_src_std48m();
 
 #define PLL_192M_LIMIT 192000000
 #define PLL_240M_LIMIT 240000000
-#define PLL_MAX_LIMIT PLL_192M_LIMIT
+//#define PLL_MAX_LIMIT PLL_192M_LIMIT
+
+#define PLL_MAX_LIMIT PLL_240M_LIMIT
 
 #define SPI_MAX_CLK (64 * MHz_UNIT)
 

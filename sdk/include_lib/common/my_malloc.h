@@ -70,6 +70,7 @@ typedef enum _mm_type {
     MM_HW_SRC_BUF,
     MM_SW_SRC_BUF,
     MM_SARADC_BUF,
+    MM_HW_SRC_NOIO,
     MM_FREEFS = 0x80,
     MM_FREEFF,
 } mm_type;
